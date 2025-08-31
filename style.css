@@ -1,0 +1,150 @@
+/* --- Core Styles & Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+    --primary-red: #e50914;
+    --success-green: #28a745;
+    --error-red: #dc3545;
+    --dark-bg: #101010;
+    --light-text: #ffffff;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --glass-bg: rgba(20, 20, 20, 0.6);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; overflow: hidden;
+}
+
+/* --- Animated Background & Animations --- */
+#particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes popIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+.shake { animation: shake 0.5s ease-in-out; }
+
+/* --- Main Container --- */
+.container {
+    width: 100%; max-width: 600px; padding: 2.5rem;
+    background: var(--glass-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+    border-radius: 15px; border: 1px solid var(--border-color);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.2), 0 0 40px rgba(229, 9, 20, 0.3);
+    animation: fadeIn 0.8s ease-out; text-align: center; z-index: 10;
+}
+
+.main-logo {
+    width: 100px; height: 100px; border-radius: 50%;
+    border: 3px solid var(--primary-red); margin: 0 auto 1rem; display: block;
+}
+
+header h1 {
+    font-size: 2.5rem; color: var(--light-text); margin-bottom: 0.5rem;
+    font-weight: 700; text-shadow: 0 0 10px var(--primary-red);
+}
+header p { margin-bottom: 2rem; color: #b3b3b3; }
+
+/* --- Form Elements --- */
+#url-input {
+    width: 100%; padding: 15px; font-size: 1rem; border-radius: 8px;
+    border: 2px solid var(--border-color); background-color: rgba(0, 0, 0, 0.3);
+    color: var(--light-text); outline: none; transition: all 0.3s;
+}
+#url-input:focus { border-color: var(--primary-red); box-shadow: 0 0 15px rgba(229, 9, 20, 0.6); }
+
+#bypass-btn {
+    width: 100%; padding: 15px; margin-top: 1rem; font-size: 1.1rem;
+    font-weight: 600; cursor: pointer; border: none; border-radius: 8px;
+    background-color: var(--primary-red); color: var(--light-text); transition: all 0.3s;
+}
+#bypass-btn:hover:not(:disabled) {
+    background-color: #ff1a25; transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(229, 9, 20, 0.4);
+}
+#bypass-btn:disabled { background-color: #555; cursor: not-allowed; opacity: 0.7; }
+
+/* --- TOUCH EFFECT ADDED HERE --- */
+#bypass-btn:active:not(:disabled) {
+    transform: translateY(-1px) scale(0.98);
+    box-shadow: 0 4px 10px rgba(229, 9, 20, 0.3);
+}
+
+/* --- Result Display --- */
+.result-box {
+    margin-top: 2rem; background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color); border-radius: 8px;
+    padding: 1rem; min-height: 50px; text-align: left;
+    word-wrap: break-word; opacity: 0; transform: translateY(10px);
+    transition: opacity 0.5s, transform 0.5s;
+}
+.result-box.visible { opacity: 1; transform: translateY(0); }
+#result-output {
+    color: var(--success-green); font-family: 'Courier New', Courier, monospace;
+    font-size: 0.95rem; line-height: 1.5;
+}
+#result-output.error { color: var(--error-red); }
+#result-actions { margin-top: 1rem; display: flex; gap: 10px; justify-content: flex-end; }
+.action-btn {
+    padding: 8px 15px; border: none; border-radius: 5px; cursor: pointer;
+    font-weight: 600; transition: all 0.3s ease;
+}
+.btn-primary { background-color: var(--primary-red); color: white; }
+.btn-primary:hover { background-color: #ff1a25; transform: scale(1.05); }
+.btn-secondary { background-color: transparent; color: var(--light-text); border: 1px solid var(--light-text); }
+.btn-secondary:hover { background-color: var(--light-text); color: var(--dark-bg); }
+
+/* --- Modal Styles --- */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); display: flex;
+    justify-content: center; align-items: center; z-index: 1000;
+    opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s;
+}
+.modal-overlay.active { opacity: 1; visibility: visible; }
+.modal {
+    background: var(--glass-bg); backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); padding: 2.5rem;
+    border-radius: 15px; border: 1px solid var(--border-color);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.7); width: 90%;
+    max-width: 450px; text-align: center;
+    animation: popIn 0.5s ease-out forwards;
+}
+.modal h2 { color: var(--light-text); margin-bottom: 1rem; }
+.close-modal {
+    position: absolute; top: 15px; right: 15px; font-size: 1.5rem; color: #aaa;
+    cursor: pointer; transition: color 0.3s, transform 0.3s;
+}
+.close-modal:hover { color: var(--light-text); transform: rotate(90deg); }
+
+/* --- Captcha Modal Specifics --- */
+#captcha-question {
+    font-size: 1.5rem; font-weight: 600;
+    color: var(--light-text); margin-bottom: 1.5rem;
+    letter-spacing: 2px;
+}
+#captcha-input {
+    width: 100%; padding: 12px; font-size: 1.2rem; text-align: center;
+    border-radius: 8px; border: 2px solid var(--border-color);
+    background-color: rgba(0, 0, 0, 0.3); color: var(--light-text);
+    outline: none; transition: all 0.3s; margin-bottom: 1rem;
+}
+#captcha-input:focus { border-color: var(--primary-red); }
+#captcha-submit-btn {
+    width: 100%; padding: 12px; font-size: 1rem; font-weight: 600;
+    cursor: pointer; border: none; border-radius: 8px;
+    background-color: var(--success-green); color: var(--light-text);
+    transition: all 0.3s;
+}
+#captcha-submit-btn:hover { background-color: #218838; }
+#captcha-error {
+    color: var(--error-red); margin-top: 10px;
+    min-height: 20px; font-weight: 600;
+  }
