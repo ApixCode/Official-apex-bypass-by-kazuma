@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Bypasser | Human-Verified Bypass</title>
+    <!-- Link to the external stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="particles-js"></div>
+
+    <!-- Human Verification CAPTCHA Modal -->
+    <div class="modal-overlay" id="captcha-modal-overlay">
+        <div class="modal" id="captcha-modal">
+            <h2>Human Verification</h2>
+            <p id="captcha-question">12 + 5 = ?</p>
+            <input type="number" id="captcha-input" placeholder="Your Answer" required>
+            <button id="captcha-submit-btn">Verify</button>
+            <p id="captcha-error"></p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <img src="https://i.imgur.com/q9GWr0Z.png" alt="Apex Bot Logo" class="main-logo">
+        <header>
+            <h1>Apex Bypasser</h1>
+            <p>The ultimate tool to bypass annoying links, powered by a high-speed API.</p>
+        </header>
+        <main>
+            <form id="bypass-form">
+                <input type="url" id="url-input" placeholder="https://example.com/link" required>
+                <button type="submit" id="bypass-btn">Bypass</button>
+            </form>
+            <div class="result-box" id="result-box">
+                <code id="result-output"></code>
+                <div id="result-actions"></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- External Libraries & Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <!-- API Configuration (Simulating .env) -->
+    <script src="config.js"></script>
+    
+    <!-- Main Application Logic -->
+    <script src="script.js"></script>
+</body>
+</html>
