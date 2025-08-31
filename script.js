@@ -2,6 +2,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // Particle.js config...
     particlesJS('particles-js', { particles: { number: { value: 80, density: { enable: true, value_area: 800 } }, color: { value: "#ffffff" }, shape: { type: "circle" }, opacity: { value: 0.5, random: false }, size: { value: 3, random: true }, line_linked: { enable: true, distance: 150, color: "#e50914", opacity: 0.4, width: 1 }, move: { enable: true, speed: 4, direction: "none", random: false, straight: false, out_mode: "out" } }, interactivity: { detect_on: "canvas", events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" } }, modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } } }, retina_detect: true });
 
+    // === START: NEW WELCOME MODAL LOGIC ===
+    const welcomeModalOverlay = document.getElementById('welcome-modal-overlay');
+    const welcomeContinueBtn = document.getElementById('welcome-continue-btn');
+
+    // Show the modal only if it hasn't been shown in this session
+    if (!sessionStorage.getItem('welcomeModalShown')) {
+        welcomeModalOverlay.classList.add('active');
+        sessionStorage.setItem('welcomeModalShown', 'true');
+    }
+
+    function closeWelcomeModal() {
+        welcomeModalOverlay.classList.remove('active');
+    }
+
+    welcomeContinueBtn.addEventListener('click', closeWelcomeModal);
+    welcomeModalOverlay.addEventListener('click', (e) => {
+        // Close only if the overlay itself (the dark background) is clicked
+        if (e.target === welcomeModalOverlay) {
+            closeWelcomeModal();
+        }
+    });
+    // === END: NEW WELCOME MODAL LOGIC ===
+
+
     // DOM Elements
     const bypassForm = document.getElementById('bypass-form');
     const urlInput = document.getElementById('url-input');
@@ -20,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // API Config from config.js
     const primaryApi = API_CONFIG.primary;
-    const secondaryApi = API_CONFIG.secondary;
+    const secondaryApi = API__CONFIG.secondary;
 
     let captchaAnswer = 0;
     
